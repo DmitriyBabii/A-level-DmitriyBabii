@@ -1,4 +1,4 @@
-package HW1;
+package com.Alevel.HW1;
 
 import java.util.Scanner;
 

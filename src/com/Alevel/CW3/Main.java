@@ -1,4 +1,4 @@
-package CW3;
+package com.Alevel.CW3;
 
 import java.util.Random;
 import java.util.Scanner;
