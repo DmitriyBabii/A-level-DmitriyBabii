@@ -1,4 +1,4 @@
-package com.Alevel.HW2;
+package com.alevel.hw2;
 
 import java.util.Random;
 

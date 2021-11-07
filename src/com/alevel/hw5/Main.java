@@ -1,4 +1,4 @@
-package com.Alevel.HW5;
+package com.alevel.hw5;
 
 
 import java.util.Arrays;
