@@ -47,7 +47,7 @@ class Car {
             this.startEngine();
         }
         System.out.println(manufacturer + " is on the way");
-        for (int i = 0; petrol >= consumption && engine.isStart(); i++) {
+        while (petrol >= consumption && engine.isStart()) {
             petrol -= consumption;
             mileage += 100; //kilometers
         }
@@ -60,13 +60,12 @@ class Car {
 
     @Override
     public String toString() {
-        return "Car{" +
-                "manufacturer='" + manufacturer.getRussianName() + '\'' +
-                ", engine=" + engine +
-                ", color=" + color +
-                ", petrol=" + petrol +
-                ", mileage=" + mileage +
-                '}';
+        return "Car:\n" +
+                "\tmanufacturer='" + manufacturer.getRussianName() + '\'' +
+                "\n\tengine=" + engine +
+                "\n\tcolor=" + color + '(' + color.getCode() + ')' +
+                "\n\tpetrol=" + petrol +
+                "\n\tmileage=" + mileage;
     }
 
     public Manufacturer getManufacturer() {
