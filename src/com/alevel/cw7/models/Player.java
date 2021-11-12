@@ -136,8 +136,8 @@ public class Player {
     public String toString() {
         return "\nSTATUS:\n" + type + ": " + name +
                 "\nAge = " + age +
-                "\nMoney = " + money + TextColor.RESET.ansi +
-                "\nPresents = " + (presents.length == 0 ? "have no presents" : Arrays.toString(presents)) + TextColor.RESET.ansi +
+                "\nMoney = " + money +
+                "\nPresents = " + (presents.length == 0 ? "have no presents" : Arrays.toString(presents)) +
 
                 "\nSatiety = " + (satiety < 50 ? TextColor.RED.ansi :
                 (satiety < 60) ? TextColor.YELLOW.ansi : TextColor.GREEN.ansi) + satiety + TextColor.RESET.ansi +
