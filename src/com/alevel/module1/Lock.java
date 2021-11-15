@@ -1,17 +1,17 @@
 package com.alevel.module1;
 
-public class Lock {
+final class Lock {
     private final int[] mass;
 
     public Lock(int[] mass) {
         this.mass = mass;
     }
 
-    public int[] getArray() {
+    public final int[] getArray() {
         return (mass == null) ? null : mass.clone();
     }
 
-    public void printArray() {
+    public final void printArray() {
         for (int i : mass) {
             System.out.printf("%8d", i);
         }

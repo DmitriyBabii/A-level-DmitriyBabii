@@ -1,7 +1,5 @@
 package com.alevel.module1;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -41,6 +39,7 @@ public class Main {
         Lock lock = new Lock(mass);
         lock.getArray()[0] = 2;
         lock.printArray();
+
     }
 
     static int[] createArray() {
