@@ -9,8 +9,8 @@ public class MainTest {
 
     @Test
     public void numberSum_positive() throws Exception {
-        Assert.assertEquals(10, Main.numberSum(1234));
-        Assert.assertEquals(8, Main.numberSum(422));
+        assertEquals(10, Main.numberSum(1234));
+        assertEquals(8, Main.numberSum(422));
     }
 
     @Test(expected = Exception.class)
@@ -21,10 +21,10 @@ public class MainTest {
     @Test
     public void calculate_positive() throws Exception {
         //Assert.assertEquals(2, Main.calculate("4 - 2"));
-        Assert.assertTrue(Main.calculate("4 + 2") == 6.0);
-        Assert.assertTrue(Main.calculate("4 - 2") == 2.0);
-        Assert.assertTrue(Main.calculate("2 * 2") == 4.0);
-        Assert.assertTrue(Main.calculate("2 / 2") == 1.0);
+        assertEquals(6.0, Main.calculate("4 + 2"), 0.0);
+        assertEquals(2.0, Main.calculate("4 - 2"), 0.0);
+        assertEquals(4.0, Main.calculate("2 * 2"), 0.0);
+        assertEquals(1.0, Main.calculate("2 / 2"), 0.0);
     }
 
     @Test(expected = Exception.class)
