@@ -46,21 +46,29 @@ class Main {
                 flag = false;
                 System.out.print("Enter your number: ");
                 int number = Integer.parseInt(in.next());
-                final int divider = 10;
-                int sum = 0;
+                System.out.println("Sum = " + numberSum(number));
 
-                while (number > 0) {
-                    sum += number % divider;
-                    number /= divider;
-                }
-
-                System.out.println("Sum = " + sum);
             } catch (Exception ex) {
                 System.out.println("You didn't enter numbers" +
                         "\nTry again");
                 flag = true;
             }
         } while (flag);
+    }
+
+    public static int numberSum(int number) throws Exception {
+        if (number < 0) {
+            throw new Exception();
+        }
+
+        final int divider = 10;
+        int sum = 0;
+
+        while (number > 0) {
+            sum += number % divider;
+            number /= divider;
+        }
+        return sum;
     }
 
     /**
@@ -229,45 +237,57 @@ class Main {
         do {
             System.out.print("Enter your expression: ");
             expression = in.nextLine();
-            expression = expression.trim();
-            String[] mass = expression.split(" ");
-
-            if (isCorrect(mass)) {
-                double result = 0;
-                if (mass.length == 1) {
-                    result = Integer.parseInt(mass[0]);
-                    System.out.println("Result = " + result);
-                } else {
-                    System.out.println("Result = " + switchForMany(mass));
-                }
+            if (expression.equals("0")) {
+                break;
             }
-        } while (!expression.equals("0"));
+            try {
+                System.out.printf("Result = %.4f\n", calculate(expression));
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        } while (true);
 
     }
 
-    private static boolean isCorrect(String[] mass) {
+    public static double calculate(String expression) throws Exception {
+        expression = expression.trim();
+        String[] mass = expression.split(" ");
+
+        if (isCorrect(mass)) {
+            if (mass.length == 1) {
+                return Integer.parseInt(mass[0]);
+            }
+            return switchForMany(mass);
+        }
+        return 0;
+    }
+
+    private static boolean isCorrect(String[] mass) throws Exception {
         if ((((mass.length & 1) == 0) && (mass.length != 0))) {
-            System.out.println("Insufficient data.");
-            return false;
+            throw new Exception("Insufficient data.");
+            //System.out.println("Insufficient data.");
+            //return false;
         }
 
         for (int i = 0; i < mass.length; i++) {
-            try {
-                if ((i & 1) == 0) {
-                    Integer.parseInt(mass[i]);
-                } else if (!mass[i].equals("/") && !mass[i].equals("*") &&
-                        !mass[i].equals("-") && !mass[i].equals("+")) {
-                    System.out.println("The calculator has only 4 definitions (+, -, *, /).");
-                    return false;
-                } else if (mass[i].equals("/") && mass[i + 1].equals("0")) {
-                    System.out.println("You cannot divide by zero");
-                    return false;
-                }
-
-            } catch (Exception ex) {
-                System.out.println("The calculator only accepts int values.");
-                return false;
+            //try {
+            if ((i & 1) == 0) {
+                Integer.parseInt(mass[i]);
+            } else if (!mass[i].equals("/") && !mass[i].equals("*") &&
+                    !mass[i].equals("-") && !mass[i].equals("+")) {
+                throw new Exception("The calculator has only 4 definitions (+, -, *, /).");
+                //System.out.println("The calculator has only 4 definitions (+, -, *, /).");
+                //return false;
+            } else if (mass[i].equals("/") && mass[i + 1].equals("0")) {
+                throw new Exception("You cannot divide by zero");
+                //System.out.println("You cannot divide by zero");
+                //return false;
             }
+
+            //} catch (Exception ex) {
+            //System.out.println("The calculator only accepts int values.");
+            //return false;
+            //}
         }
 
         return true;
