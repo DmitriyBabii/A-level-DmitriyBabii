@@ -28,11 +28,23 @@ public class MainTest {
     }
 
     @Test(expected = Exception.class)
-    public void calculate_negativeIncorrectInput() throws Exception {
+    public void calculate_InsufficientData() throws Exception {
         Main.calculate("- 1");
+    }
+
+    @Test(expected = Exception.class)
+    public void calculate_NotInt() throws Exception {
         Main.calculate("1-");
-        Main.calculate("");
+    }
+
+    @Test(expected = Exception.class)
+    public void calculate_DivideByZero() throws Exception {
         Main.calculate("1 / 0");
+    }
+
+    @Test(expected = Exception.class)
+    public void calculate_NotOperator() throws Exception {
         Main.calculate("1 % 1");
     }
+
 }
