@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         task0();
         task1();
         task2();
@@ -36,24 +36,14 @@ class Main {
      * Для введённого пользователем с клавиатуры натурального
      * числа посчитайте сумму всех его цифр (заранее не известно сколько цифр будет в числе).
      */
-    private static void task1() {
+    public static void task1() throws Exception {
         System.out.println("\nSUM OF DIGITS NUMBERS");
-        Scanner in = new Scanner(System.in);
+        InputOutput in = new InputOutput();
         boolean flag = false;
 
-        do {
-            try {
-                flag = false;
-                System.out.print("Enter your number: ");
-                int number = Integer.parseInt(in.next());
-                System.out.println("Sum = " + numberSum(number));
-
-            } catch (Exception ex) {
-                System.out.println("You didn't enter numbers" +
-                        "\nTry again");
-                flag = true;
-            }
-        } while (flag);
+        System.out.print("Enter your number: ");
+        int number = in.getInput();
+        System.out.println("Sum = " + numberSum(number));
     }
 
     public static int numberSum(int number) throws Exception {
