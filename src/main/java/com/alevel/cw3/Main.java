@@ -252,6 +252,20 @@ class Main {
         return 0;
     }
 
+    public static double calculate(InputOutput in) throws Exception {
+        String expression = in.getString();
+        expression = expression.trim();
+        String[] mass = expression.split(" ");
+
+        if (isCorrect(mass)) {
+            if (mass.length == 1) {
+                return Integer.parseInt(mass[0]);
+            }
+            return switchForMany(mass);
+        }
+        return 0;
+    }
+
     private static boolean isCorrect(String[] mass) throws Exception {
         if ((((mass.length & 1) == 0) && (mass.length != 0))) {
             throw new Exception("Insufficient data.");

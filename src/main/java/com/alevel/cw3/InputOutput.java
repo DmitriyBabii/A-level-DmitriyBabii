@@ -10,8 +10,11 @@ public class InputOutput {
     }
 
     public int getInput() {
-
         return scanner.nextInt();
+    }
+
+    public String getString() {
+        return scanner.nextLine();
     }
 }
 
