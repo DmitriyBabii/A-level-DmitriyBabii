@@ -18,5 +18,15 @@ public class Main {
 
         Recovery car = new PassengerCar(Series.AX, 242, Color.RED);
         car.refuel();
+
+        Recovery recCar1 = new Recovery() {
+            @Override
+            public void refuel() {
+                System.out.println("Refuel!");
+            }
+        };
+
+        //lambda
+        Recovery recCar2 = () -> System.out.println("Refuel!");
     }
 }

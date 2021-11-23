@@ -3,8 +3,8 @@ package com.alevel.hw10.models;
 import java.util.Random;
 
 public class Passenger {
-    private final static Random rand = new Random();
-    private final static String[] names = {
+    private final static Random RAND = new Random();
+    private final static String[] NAMES = {
             "Oliver",
             "Jack",
             "Harry",
@@ -19,8 +19,8 @@ public class Passenger {
     int weight;
 
     Passenger() {
-        this.name = names[rand.nextInt(names.length)];
-        this.weight = 50 + rand.nextInt(51);
+        this.name = NAMES[RAND.nextInt(NAMES.length)];
+        this.weight = 50 + RAND.nextInt(51);
     }
 
     @Override
