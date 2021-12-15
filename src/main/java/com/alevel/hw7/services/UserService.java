@@ -1,8 +1,8 @@
-package com.alevel.cw7.services;
+package com.alevel.hw7.services;
 
-import com.alevel.cw7.actions.*;
-import com.alevel.cw7.models.Player;
-import com.alevel.cw7.models.Type;
+import com.alevel.hw7.actions.*;
+import com.alevel.hw7.models.Player;
+import com.alevel.hw7.models.Type;
 
 import java.util.Random;
 import java.util.Scanner;

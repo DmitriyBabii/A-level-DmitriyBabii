@@ -1,4 +1,4 @@
-package com.alevel.cw7.services;
+package com.alevel.hw7.services;
 
 public enum MainMenu {
     Feeding, Games,

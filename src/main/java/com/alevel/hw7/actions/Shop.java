@@ -1,10 +1,9 @@
-package com.alevel.cw7.actions;
+package com.alevel.hw7.actions;
 
-import com.alevel.cw7.models.Player;
-import com.alevel.cw7.models.Present;
+import com.alevel.hw7.models.Player;
+import com.alevel.hw7.models.Present;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class Shop {
 

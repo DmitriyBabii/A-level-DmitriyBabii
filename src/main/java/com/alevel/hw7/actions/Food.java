@@ -1,6 +1,6 @@
-package com.alevel.cw7.actions;
+package com.alevel.hw7.actions;
 
-import com.alevel.cw7.models.Player;
+import com.alevel.hw7.models.Player;
 
 public class Food {
     public void doAction(Player player) {

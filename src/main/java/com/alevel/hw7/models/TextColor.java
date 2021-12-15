@@ -1,4 +1,4 @@
-package com.alevel.cw7.models;
+package com.alevel.hw7.models;
 
 public enum TextColor {
     RESET("\u001B[0m"),
