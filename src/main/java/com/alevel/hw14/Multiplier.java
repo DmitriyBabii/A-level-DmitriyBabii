@@ -1,5 +1,5 @@
 package com.alevel.hw14;
 
-public interface Multiplier<T> {
-    <T extends Number>T[] doubleValueIn(T[] array);
+public interface Multiplier {
+    <T extends Number> Number[] doubleValueIn(T[] array);
 }
