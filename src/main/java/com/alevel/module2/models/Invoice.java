@@ -8,9 +8,9 @@ import java.util.Date;
 public class Invoice {
     private static int limit;
 
-    private Date date;
-    private Technics[] technic;
-    private Customer customer;
+    private final Date date;
+    private final Technics[] technic;
+    private final Customer customer;
     private TypeSale type;
 
     public Invoice(Technics[] technic, Customer customer, Date date) {
@@ -21,8 +21,8 @@ public class Invoice {
 
     public int countTelephone() {
         int count = 0;
-        for (int i = 0; i < technic.length; i++) {
-            if (technic[i].getType().equals("Telephone")) {
+        for (Technics technics : technic) {
+            if (technics.getType().equals("Telephone")) {
                 count++;
             }
         }
@@ -31,8 +31,8 @@ public class Invoice {
 
     public int countTelevision() {
         int count = 0;
-        for (int i = 0; i < technic.length; i++) {
-            if (technic[i].getType().equals("Television")) {
+        for (Technics technics : technic) {
+            if (technics.getType().equals("Television")) {
                 count++;
             }
         }
@@ -58,16 +58,16 @@ public class Invoice {
 
     private int sumPrice() {
         int sum = 0;
-        for (int i = 0; i < technic.length; i++) {
-            sum += technic[i].getPrice();
+        for (Technics technics : technic) {
+            sum += technics.getPrice();
         }
         return sum;
     }
 
     private String outputTechnic() {
         StringBuilder str = new StringBuilder();
-        for (int i = 0; i < technic.length; i++) {
-            str.append(technic[i]);
+        for (Technics technics : technic) {
+            str.append(technics);
         }
         return str.toString();
     }
