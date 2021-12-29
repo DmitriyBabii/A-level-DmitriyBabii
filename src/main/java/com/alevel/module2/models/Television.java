@@ -7,8 +7,8 @@ public class Television extends Technics {
     private String country;
 
     public Television() {
-
     }
+
     public Television(String series, int diagonal, Screen screenType, String country, int price) {
         super(series, screenType, price);
         this.diagonal = diagonal;
@@ -16,12 +16,13 @@ public class Television extends Technics {
         count++;
     }
 
-    public static String getType() {
-        return type;
+    public static int getCount() {
+        return count;
     }
 
-    public int getCount() {
-        return count;
+    @Override
+    public String getType() {
+        return type;
     }
 
     @Override

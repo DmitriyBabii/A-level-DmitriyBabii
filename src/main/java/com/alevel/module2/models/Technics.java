@@ -11,6 +11,8 @@ abstract public class Technics {
     public Technics() {
     }
 
+    abstract public String getType();
+
     public Technics(String series, Screen screenType, int price) {
         this.series = series;
         this.screenType = screenType;

@@ -15,6 +15,10 @@ public class Customer {
         return id;
     }
 
+    public int getAge() {
+        return age;
+    }
+
     @Override
     public String toString() {
         return String.format("id = %s\nemail = %s\nage = %s\n", id, email, age);

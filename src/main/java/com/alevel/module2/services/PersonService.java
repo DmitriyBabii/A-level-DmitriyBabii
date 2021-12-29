@@ -17,6 +17,6 @@ public class PersonService {
 
         String id = "" + Math.abs(rand.nextLong());
 
-        return new Customer(id, email.toString(), 15 + rand.nextInt(51));
+        return new Customer(id, email.toString(), 10 + rand.nextInt(31));
     }
 }

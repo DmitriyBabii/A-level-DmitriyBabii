@@ -4,18 +4,11 @@ import com.alevel.module2.models.*;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ShopService {
 
-    private static String[] properties = {
-            "type", "series", "model",
-            "diagonal", "screen type",
-            "country", "price"
-    };
-
     private static ArrayList<Invoice> list = null;
+    private static HashMap<String, Integer> map = null;
 
     public static void readFile() {
         BufferedReader reader = null;
@@ -27,9 +20,11 @@ public class ShopService {
             String[] row;
 
             if ((line = reader.readLine()) != null) {
-                row = line.trim().split(",");
-                tech = new ArrayList<>();
 
+                row = line.trim().split(",");
+                setMap(row);
+
+                tech = new ArrayList<>();
                 while ((line = reader.readLine()) != null) {
                     row = line.trim().split(",");
                     Technics t = createTechnic(row);
@@ -54,6 +49,13 @@ public class ShopService {
         writeFile(tech);
     }
 
+    private static void setMap(String[] row) {
+        map = new HashMap<>();
+        for (int i = 0; i < row.length; i++) {
+            map.put(row[i].trim(), i);
+        }
+    }
+
     private static File getReader() {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         return new File(Objects.requireNonNull(loader.getResource("orders.csv")).getFile());
@@ -68,7 +70,7 @@ public class ShopService {
     }
 
     private static Technics createTechnic(String[] row) {
-        try {
+        /*try {
             checkRow(row);
             switch (row[0]) {
                 case "Telephone":
@@ -86,12 +88,32 @@ public class ShopService {
         } catch (NoData e) {
             System.out.println(e.getMessage());
         }
+        return null;*/
+
+        try {
+            checkRow(row);
+            switch (row[map.get("type")]) {
+                case "Telephone":
+                    return new Telephone(row[map.get("series")],
+                            row[map.get("model")],
+                            Screen.valueOf(row[map.get("screen type")]),
+                            Integer.parseInt(row[map.get("price")]));
+                case "Television":
+                    return new Television(row[map.get("series")],
+                            Integer.parseInt(row[map.get("diagonal")]),
+                            Screen.valueOf(row[map.get("screen type")]),
+                            row[map.get("country")],
+                            Integer.parseInt(row[map.get("price")]));
+            }
+        } catch (NoData e) {
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
     private static Technics[] createArrayTechnics(ArrayList<Technics> arr) {
         Random rand = new Random();
-        int count = 3 + rand.nextInt(10);
+        int count = 1 + rand.nextInt(5);
         Technics[] technics = new Technics[count];
 
         for (int i = 0; i < count; i++) {
@@ -114,7 +136,7 @@ public class ShopService {
         try {
             file = new File("Logs.txt");
             writer = new BufferedWriter(new FileWriter(file));
-            for (int i = 1; i <= 3; i++) {
+            for (int i = 0; i < 15; i++) {
                 invoice = generateInvoice(arr);
                 writer.write(date + "\n");
                 writer.write(invoice + "\n");
@@ -140,23 +162,33 @@ public class ShopService {
         }
     }
 
-    public static void outputList() {
-        System.out.println(list);
-    }
-
-    public static void stream() {
+    public static void analInfo() {
         final boolean[] flag = {true};
-
-        list.stream()
+        StreamRequest req = new StreamRequest();
+        Invoice inv = null;
+        /*list.stream()
                 .peek(a -> {
                     if (flag[0]) {
-                        System.out.println("Telephones: " + new Telephone().getCount() +
-                                "\nTelevision: " + new Television().getCount());
+                        System.out.println("Telephones: " + Telephone.getCount() +
+                                "\nTelevision: " + Television.getCount());
                         flag[0] = false;
                     }
-                }).peek(a -> Stream.of(a).min(new InvoiceComparator()).ifPresent(System.out::println))
+                })
+                //.findFirst()
+                //.min(new InvoiceComparator()).ifPresent(System.out::println);
+                .peek(a -> Stream.of(a).min(new InvoiceComparator()).ifPresent(System.out::println))
                 .collect(Collectors.toList());
-
+        */
+        System.out.println("Telephone: " + req.getCountTelephones(list) +
+                "\nTelevision: " + req.getCountTelevisions(list) +
+                "\nMin invoice: \n" + (inv = req.getSumMinInvoice(list)).getCustomer() + "Price: " + inv.getPrice() +
+                "\n\nAll price: " + req.getSumAllInvoices(list) +
+                "\nRetail: " + req.getCountRetail(list) +
+                "\nOnly one type technics: " + req.getCountOnlyTypeTechnics(list) +
+                "\n\nOnly tree invoices: \n" + req.getOnlyThreeInvoices(list) +
+                "\n\nLow age invoices: \n" + req.getLowAgeInvoices(list) +
+                "\n\nSorted invoices: " + req.getSortedInvoices(list)
+        );
 
     }
 }

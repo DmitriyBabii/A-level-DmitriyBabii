@@ -15,6 +15,34 @@ public class Invoice {
         this.customer = customer;
     }
 
+    public int countTelephone() {
+        int count = 0;
+        for (int i = 0; i < technic.length; i++) {
+            if (technic[i].getType().equals("Telephone")) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int countTelevision() {
+        int count = 0;
+        for (int i = 0; i < technic.length; i++) {
+            if (technic[i].getType().equals("Television")) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int getCountTechnic() {
+        return technic.length;
+    }
+
+    public int getAge() {
+        return customer.getAge();
+    }
+
     public int getPrice() {
         if (sumPrice() > limit) {
             type = TypeSale.WHOLESALE;
@@ -24,10 +52,13 @@ public class Invoice {
         return (int) (sumPrice() * ((type == TypeSale.RETAIL) ? 1.0 : 0.9));
     }
 
-
     public static void setLimit(int l) {
         if (limit < 0) throw new IllegalArgumentException("Limit must be more than 0");
         limit = l;
+    }
+
+    public void setType(TypeSale type) {
+        this.type = type;
     }
 
     private int sumPrice() {
@@ -46,9 +77,13 @@ public class Invoice {
         return str.toString();
     }
 
+    public TypeSale getType() {
+        return type;
+    }
+
     @Override
     public String toString() {
-        return "Customer:\n" + customer.toString() + "\n\nOrder:\n" +
+        return "Customer:\n" + customer.toString() + "\nOrder:\n" +
                 outputTechnic() + "\nPrice = " + getPrice() + "\n" +
                 "--------------------------------------------\n";
     }
