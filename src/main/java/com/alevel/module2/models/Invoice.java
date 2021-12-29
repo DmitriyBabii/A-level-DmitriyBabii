@@ -86,18 +86,22 @@ public class Invoice {
         StringBuilder result = new StringBuilder();
         int i;
 
-        result.append(((i = Integer.parseInt(date[2])) < 10) ? "0" + i : i)
-                .append(".")
-                .append(((i = Month.valueOf(date[1]).number) < 10) ? "0" + i : i)
-                .append(".")
-                .append(date[5])
-                .append(" ");
+        try {
+            result.append(((i = Integer.parseInt(date[2])) < 10) ? "0" + i : i)
+                    .append(".")
+                    .append(((i = Month.valueOf(date[1]).number) < 10) ? "0" + i : i)
+                    .append(".")
+                    .append(date[5])
+                    .append(" ");
 
-        date = date[3].split(":");
+            date = date[3].split(":");
 
-        result.append(date[0])
-                .append(":")
-                .append(date[1]);
+            result.append(date[0])
+                    .append(":")
+                    .append(date[1]);
+        } catch (NullPointerException e) {
+            return this.date.toString();
+        }
 
         return result.toString();
     }
