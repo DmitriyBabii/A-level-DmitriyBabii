@@ -36,8 +36,8 @@ public class StreamRequest {
 
     public int getCountOnlyTypeTechnics(ArrayList<Invoice> list) {
         return (int) list.stream()
-                .filter(a -> (a.getTechnic().length == a.countTelephone()) ||
-                        (a.getTechnic().length == a.countTelevision()))
+                .filter(a -> Arrays.stream(a.getTechnic()).allMatch(b -> b.getType().equals("Telephone")) ||
+                        Arrays.stream(a.getTechnic()).allMatch(b -> b.getType().equals("Television")))
                 .count();
     }
 
