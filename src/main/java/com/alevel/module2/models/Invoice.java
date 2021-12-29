@@ -2,17 +2,21 @@ package com.alevel.module2.models;
 
 import lombok.Getter;
 
+import java.util.Date;
+
 @Getter
 public class Invoice {
     private static int limit;
 
+    private Date date;
     private Technics[] technic;
     private Customer customer;
     private TypeSale type;
 
-    public Invoice(Technics[] technic, Customer customer) {
+    public Invoice(Technics[] technic, Customer customer, Date date) {
         this.technic = technic;
         this.customer = customer;
+        this.date = date;
     }
 
     public int countTelephone() {
@@ -39,10 +43,6 @@ public class Invoice {
         return technic.length;
     }
 
-    public int getAge() {
-        return customer.getAge();
-    }
-
     public int getPrice() {
         if (sumPrice() > limit) {
             type = TypeSale.WHOLESALE;
@@ -52,13 +52,8 @@ public class Invoice {
         return (int) (sumPrice() * ((type == TypeSale.RETAIL) ? 1.0 : 0.9));
     }
 
-    public static void setLimit(int l) {
-        if (limit < 0) throw new IllegalArgumentException("Limit must be more than 0");
-        limit = l;
-    }
-
-    public void setType(TypeSale type) {
-        this.type = type;
+    public TypeSale getType() {
+        return type;
     }
 
     private int sumPrice() {
@@ -77,13 +72,40 @@ public class Invoice {
         return str.toString();
     }
 
-    public TypeSale getType() {
-        return type;
+    public void setType(TypeSale type) {
+        this.type = type;
+    }
+
+    public static void setLimit(int l) {
+        if (limit < 0) throw new IllegalArgumentException("Limit must be more than 0");
+        limit = l;
+    }
+
+    private String parseDate() {
+        String[] date = this.date.toString().split(" ");
+        StringBuilder result = new StringBuilder();
+        int i;
+
+        result.append(((i = Integer.parseInt(date[2])) < 10) ? "0" + i : i)
+                .append(".")
+                .append(((i = Month.valueOf(date[1]).number) < 10) ? "0" + i : i)
+                .append(".")
+                .append(date[5])
+                .append(" ");
+
+        date = date[3].split(":");
+
+        result.append(date[0])
+                .append(":")
+                .append(date[1]);
+
+        return result.toString();
     }
 
     @Override
     public String toString() {
-        return "Customer:\n" + customer.toString() + "\nOrder:\n" +
+        return "Date: " + parseDate() +
+                "\nCustomer:\n" + customer.toString() + "\nOrder:\n" +
                 outputTechnic() + "\nPrice = " + getPrice() + "\n" +
                 "--------------------------------------------\n";
     }

@@ -4,6 +4,7 @@ import com.alevel.module2.models.Invoice;
 import com.alevel.module2.models.TypeSale;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,12 +48,14 @@ public class StreamRequest {
     public List<Invoice> getLowAgeInvoices(ArrayList<Invoice> list) {
         return list.stream()
                 .filter(a -> a.getCustomer().getAge() < 18)
-                .peek(a -> a.setType(TypeSale.LOW_AGE)).collect(Collectors.toList());
+                .peek(a -> a.setType(TypeSale.LOW_AGE))
+                .collect(Collectors.toList());
     }
 
     public List<Invoice> getSortedInvoices(ArrayList<Invoice> list) {
+        Comparator<Invoice> comparator = (o1, o2) -> o2.getCustomer().getAge() - o1.getCustomer().getAge();
         return list.stream()
-                .sorted(Comparator.comparing(Invoice::getAge).reversed()
+                .sorted(comparator
                         .thenComparing(Invoice::getCountTechnic)
                         .thenComparing(Invoice::getPrice))
                 .collect(Collectors.toList());

@@ -70,26 +70,6 @@ public class ShopService {
     }
 
     private static Technics createTechnic(String[] row) {
-        /*try {
-            checkRow(row);
-            switch (row[0]) {
-                case "Telephone":
-                    return new Telephone(row[1],
-                            row[2],
-                            Screen.valueOf(row[4]),
-                            Integer.parseInt(row[6]));
-                case "Television":
-                    return new Television(row[1],
-                            Integer.parseInt(row[3]),
-                            Screen.valueOf(row[4]),
-                            row[5],
-                            Integer.parseInt(row[6]));
-            }
-        } catch (NoData e) {
-            System.out.println(e.getMessage());
-        }
-        return null;*/
-
         try {
             checkRow(row);
             switch (row[map.get("type")]) {
@@ -124,13 +104,12 @@ public class ShopService {
 
     private static Invoice generateInvoice(ArrayList<Technics> arr) {
         Technics[] technics = createArrayTechnics(arr);
-        return new Invoice(technics, PersonService.generateCustomer());
+        return new Invoice(technics, PersonService.generateCustomer(), new Date());
     }
 
     private static void writeFile(ArrayList<Technics> arr) {
         File file = null;
         BufferedWriter writer = null;
-        Date date = new Date();
         Invoice invoice = null;
 
         try {
@@ -138,7 +117,6 @@ public class ShopService {
             writer = new BufferedWriter(new FileWriter(file));
             for (int i = 0; i < 15; i++) {
                 invoice = generateInvoice(arr);
-                writer.write(date + "\n");
                 writer.write(invoice + "\n");
                 addToList(invoice);
             }
@@ -166,19 +144,7 @@ public class ShopService {
         final boolean[] flag = {true};
         StreamRequest req = new StreamRequest();
         Invoice inv = null;
-        /*list.stream()
-                .peek(a -> {
-                    if (flag[0]) {
-                        System.out.println("Telephones: " + Telephone.getCount() +
-                                "\nTelevision: " + Television.getCount());
-                        flag[0] = false;
-                    }
-                })
-                //.findFirst()
-                //.min(new InvoiceComparator()).ifPresent(System.out::println);
-                .peek(a -> Stream.of(a).min(new InvoiceComparator()).ifPresent(System.out::println))
-                .collect(Collectors.toList());
-        */
+
         System.out.println("Telephone: " + req.getCountTelephones(list) +
                 "\nTelevision: " + req.getCountTelevisions(list) +
                 "\nMin invoice: \n" + (inv = req.getSumMinInvoice(list)).getCustomer() + "Price: " + inv.getPrice() +
