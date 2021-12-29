@@ -57,19 +57,15 @@ public class Invoice {
     }
 
     private int sumPrice() {
-        int sum = 0;
-        for (Technics technics : technic) {
-            sum += technics.getPrice();
-        }
-        return sum;
+        return Arrays.stream(technic)
+                .mapToInt(Technics::getPrice)
+                .sum();
     }
 
     private String outputTechnic() {
-        StringBuilder str = new StringBuilder();
-        for (Technics technics : technic) {
-            str.append(technics);
-        }
-        return str.toString();
+        return Arrays.stream(technic)
+                .map(Technics::toString)
+                .collect(Collectors.joining(" "));
     }
 
     public void setType(TypeSale type) {
