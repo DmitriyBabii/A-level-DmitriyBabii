@@ -1,0 +1,12 @@
+type,series,model,diagonal,screen type,country,price
+Telephone,S-10,Samsung,none,QLED,none,200
+Television,RTI-14,none,25,LED,China,1500
+Telephone,M52,Samsung,none,SuperAMOLED,none,450
+Telephone,Nova 2,Huawei,none,LCD,none,230
+Television,OLED55C1,none,55,QLED,China,2000
+Television,,none,55,QLED,China,2000
+Television,Mi TV P1,none,43,LCD,China,1300
+Telephone,Mi 6,Xiaomi ,none,IPS,none,180
+Television,QE-43Q60A,none,43,AMOLED,China,1600
+Telephone,iPhone X,Apple,none,QLED,none,1200
+Television,XR-55X90J,none,55,AMOLED,China,2500
