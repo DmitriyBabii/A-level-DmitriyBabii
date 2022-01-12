@@ -145,8 +145,8 @@ public class ServiceSQL {
         ArrayList<Device> list = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * " +
-                    "FROM device LEFT JOIN factory AS s" +
-                    "ON id_device = id_factory;");
+                    "FROM device LEFT JOIN factory " +
+                    "ON device.id_factory = factory.id_factory;");
             //preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             list = new ArrayList<>();
