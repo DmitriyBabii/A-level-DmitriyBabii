@@ -23,8 +23,8 @@ public class Main {
         System.out.println("\nBy id:\n" + serviceSQL.getInfoById(10));
         serviceSQL.updateDeviceById(10);
         System.out.println("\nBy id:\n" + serviceSQL.getInfoById(10));
-        serviceSQL.deleteDeviceById(40);
-        System.out.println(serviceSQL.getDevicesByFactoryId(10));
+        serviceSQL.deleteDeviceById(10);
+        System.out.println(serviceSQL.getDevicesByFactoryId(5));
         serviceSQL.factoryInfo();
 
         serviceSQL.close();

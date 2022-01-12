@@ -56,7 +56,7 @@ public class Device {
             }
             devices[i] = new Device(DeviceType.values()[rand.nextInt(DeviceType.values().length)],
                     "Model" + (Device.countDevice + 1),
-                    Math.abs(rand.nextInt()),
+                    rand.nextInt(50000),
                     Date.valueOf(LocalDate.now()),
                     "Some description",
                     true,

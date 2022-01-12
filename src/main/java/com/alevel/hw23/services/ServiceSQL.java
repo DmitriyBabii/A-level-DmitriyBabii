@@ -197,9 +197,11 @@ public class ServiceSQL {
 
     public void factoryInfo() {
         try {
-            ResultSet resultSet = statement.executeQuery("SELECT COUNT(id_device) FROM device GROUP BY id_factory");
+            ResultSet resultSet = statement.executeQuery("SELECT id_factory, COUNT(id_device), SUM(price) " +
+                    "FROM device GROUP BY id_factory");
             while (resultSet.next()) {
-                System.out.println("Count: " + resultSet.getInt(1));
+                System.out.printf("ID factory: %-5dCount: %-5dPrice: %d\n",
+                        resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3));
             }
             resultSet.close();
         } catch (SQLException e) {
