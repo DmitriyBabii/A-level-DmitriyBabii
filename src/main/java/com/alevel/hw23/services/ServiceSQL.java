@@ -32,6 +32,7 @@ public class ServiceSQL {
             if (resultSet.next()) {
                 Device.setCountDevice(resultSet.getInt(1));
             }
+            resultSet.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -77,6 +78,7 @@ public class ServiceSQL {
                 preparedStatement.setString(1, factory.getNameFactory());
                 preparedStatement.setString(2, factory.getCountry().toString());
                 preparedStatement.executeUpdate();
+                preparedStatement.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
@@ -102,6 +104,7 @@ public class ServiceSQL {
                 preparedStatement.setBoolean(6, device.isAvailability());
                 preparedStatement.setInt(7, device.getIdFactory());
                 preparedStatement.executeUpdate();
+                preparedStatement.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
@@ -135,6 +138,8 @@ public class ServiceSQL {
                         resultSet.getInt("id_factory")
                 );
             }
+            preparedStatement.close();
+            resultSet.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -146,8 +151,8 @@ public class ServiceSQL {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * " +
                     "FROM device LEFT JOIN factory " +
-                    "ON device.id_factory = factory.id_factory;");
-            //preparedStatement.setInt(1, id);
+                    "ON device.id_factory = factory.id_factory WHERE device.id_factory=?;");
+            preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             list = new ArrayList<>();
             while (resultSet.next()) {
@@ -162,6 +167,8 @@ public class ServiceSQL {
                         resultSet.getInt("id_factory")
                 ));
             }
+            preparedStatement.close();
+            resultSet.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -180,6 +187,8 @@ public class ServiceSQL {
                         Country.valueOf(resultSet.getString("country"))
                 );
             }
+            preparedStatement.close();
+            resultSet.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -192,6 +201,7 @@ public class ServiceSQL {
             while (resultSet.next()) {
                 System.out.println("Count: " + resultSet.getInt(1));
             }
+            resultSet.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -211,6 +221,7 @@ public class ServiceSQL {
             preparedStatement.setBoolean(6, false);
             preparedStatement.setInt(7, id);
             preparedStatement.executeUpdate();
+            preparedStatement.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -222,6 +233,7 @@ public class ServiceSQL {
                     "WHERE (id_device = ?);\n");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
+            preparedStatement.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -239,6 +251,7 @@ public class ServiceSQL {
                         Country.valueOf(resultSet.getString("country"))
                 ));
             }
+            resultSet.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -262,9 +275,20 @@ public class ServiceSQL {
                         resultSet.getInt("id_factory")
                 ));
             }
+            resultSet.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return list;
+    }
+
+    public void close() {
+        try {
+            connection.close();
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
