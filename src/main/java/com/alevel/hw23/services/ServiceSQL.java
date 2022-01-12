@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ServiceSQL {
-    private static Connection connection;
-    private static Statement statement;
+    private Connection connection;
+    private Statement statement;
 
     public ServiceSQL() {
         try {
