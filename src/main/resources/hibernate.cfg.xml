@@ -20,10 +20,8 @@
         <property name="format_sql">true</property>
 
         <!-- List of XML mapping files -->
-        <mapping class="com.alevel.hw24.models.Ticket"/>
-<!--        <mapping class="com.alevel.hw24.models.Film"/>-->
-<!--        <mapping class="com.alevel.hw24.models.Session"/>-->
-<!--        <mapping class="com.alevel.hw24.models.User"/>-->
+        <mapping class="com.alevel.hw24.models.Device"/>
+        <mapping class="com.alevel.hw24.models.Factory"/>
 
     </session-factory>
 </hibernate-configuration>
