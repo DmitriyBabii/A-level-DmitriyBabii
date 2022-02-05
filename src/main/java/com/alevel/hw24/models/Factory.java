@@ -1,6 +1,8 @@
 package com.alevel.hw24.models;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -8,38 +10,31 @@ import java.util.Random;
 import java.util.Set;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "factory")
 public class Factory {
 
     @Id
-    @GeneratedValue
-    private int idFactory;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(value = AccessLevel.NONE)
+    private Integer idFactory;
     @Column
     private String nameFactory;
     @Column
     private Country country;
 
-    @OneToMany(mappedBy = "factory")
+    @OneToMany//(/*fetch = FetchType.LAZY,*/ mappedBy = "factory")
     private Set<Device> deviceSet = new HashSet<>();
+
+    private Factory() {
+    }
 
     public Factory(String nameFactory, Country country) {
         this.nameFactory = nameFactory;
         this.country = country;
     }
 
-    public static Factory[] createFactories(int n) {
-        if (n < 0) {
-            return null;
-        }
-        Random rand = new Random();
-        Factory[] factories = new Factory[n];
-        for (int i = 0; i < n; i++) {
-            factories[i] = new Factory("Factory",
-                    Country.values()[rand.nextInt(Country.values().length)]);
-        }
-        return factories;
-    }
 
     @Override
     public String toString() {
