@@ -24,7 +24,7 @@ public class User {
     @OneToMany
     private Set<Ticket> tickets = new HashSet<>();
 
-    public User() {
+    private User() {
     }
 
     public User(String name, Date date) {

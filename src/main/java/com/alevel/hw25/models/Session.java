@@ -26,7 +26,7 @@ public class Session {
     @JoinColumn
     private Film film;
 
-    public Session() {
+    private Session() {
     }
 
     public Session(Integer numberOfSeats, Integer roomNumber, Film film) {

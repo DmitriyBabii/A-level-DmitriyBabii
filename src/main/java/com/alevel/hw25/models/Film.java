@@ -25,7 +25,7 @@ public class Film {
     @OneToMany
     private Set<Session> sessions = new HashSet<>();
 
-    public Film() {
+    private Film() {
     }
 
     public Film(String name, Date date) {
